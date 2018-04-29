@@ -1,0 +1,41 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add react-router-dom
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  9.4.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: EACCES: permission denied, mkdir '/Users/admin/Desktop/reactnd-project-myreads-starter/node_modules/abbrev'
+
+npm manifest: 
+  {
+    "dependencies": {
+      "prop-types": "^15.6.1",
+      "react": "^16.3.2",
+      "react-dom": "^16.3.2"
+    },
+    "devDependencies": {
+      "react-scripts": "1.1.4"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
