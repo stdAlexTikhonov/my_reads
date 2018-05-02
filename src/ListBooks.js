@@ -5,13 +5,6 @@ import BookShelf from './BookShelf';
 
 class ListBooks extends Component {
 
-  
-
-    state = {
-        query: ''
-    }
-
-  
     render() {
 
         const { books } = this.props;
@@ -27,9 +20,9 @@ class ListBooks extends Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf books={booksCR} />
-                <BookShelf books={booksWR} />
-                <BookShelf books={booksR} />
+                <BookShelf key={0} books={booksCR} />
+                <BookShelf key={1} books={booksWR} />
+                <BookShelf key={2} books={booksR} />
               </div>
             </div>
             <div className="open-search">

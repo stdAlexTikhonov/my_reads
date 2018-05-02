@@ -24,9 +24,9 @@ class BookShelf extends Component {
             <div className="bookshelf-books">
               <ol className="books-grid"> 
                 {
-                    books.map(book => {
+                    books.map((book, ind) => {
                     return (
-                        <li>
+                        <li key={ind}>
                         <div className="book">
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
