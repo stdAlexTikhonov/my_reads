@@ -4,6 +4,15 @@ import serializeForm from 'form-serialize';
 
 class Search extends Component {
 
+    constructor(props) {
+      super(props);
+      this.handleChangeStatus = this.handleChangeStatus.bind(this);
+    }
+
+    handleChangeStatus(e) {
+      this.props.onChangeBookStatus(e.target.attributes.getNamedItem('data-id').value,e.target.value);
+    }
+
     handleChange = (e) => {
         e.preventDefault();
         const values = serializeForm(e.target, { hash: true});
@@ -17,6 +26,7 @@ class Search extends Component {
   
     render() {
       const { searchResult } = this.props;
+
     
         return (
             <div className="search-books">
@@ -47,7 +57,7 @@ class Search extends Component {
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select onChange={this.handleChangeStatus} data-id={book.id}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

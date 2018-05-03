@@ -1,21 +1,22 @@
 import React, {Component } from 'react'
 
 class BookShelf extends Component {
-
-  
-
-    state = {
-        query: ''
+    constructor(props) {
+      super(props);
+      this.handleChange = this.handleChange.bind(this);
     }
 
-  
+    handleChange(e) {
+      this.props.onChange(e.target.attributes.getNamedItem('data-id').value,e.target.value);
+    }
+
     render() {
         const { books } = this.props;
 
         const title = {
-            'CR': 'Currently Reading',
-            'WR': 'Want to Read',
-            'R': 'Read'
+            'currentlyReading': 'Currently Reading',
+            'wantToRead': 'Want to Read',
+            'read': 'Read'
         }
  
         return (
@@ -31,7 +32,7 @@ class BookShelf extends Component {
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select onChange={this.handleChange} data-id={book.id}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

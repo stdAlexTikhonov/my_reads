@@ -5,13 +5,14 @@ import BookShelf from './BookShelf';
 
 class ListBooks extends Component {
 
+
     render() {
 
-        const { books } = this.props;
+        const { books, onChangeBookStatus } = this.props;
 
-        const booksCR = books.filter(book => book.status === 'CR'),
-              booksWR = books.filter(book => book.status === 'WR'),
-              booksR = books.filter(book => book.status === 'R');
+        const booksCR = books.filter(book => book.status === 'currentlyReading'),
+              booksWR = books.filter(book => book.status === 'wantToRead'),
+              booksR = books.filter(book => book.status === 'read');
 
         return (
             <div className="list-books">
@@ -20,9 +21,9 @@ class ListBooks extends Component {
             </div>
             <div className="list-books-content">
               <div>
-                <BookShelf key={0} books={booksCR} />
-                <BookShelf key={1} books={booksWR} />
-                <BookShelf key={2} books={booksR} />
+                <BookShelf key={0} books={booksCR} onChange={onChangeBookStatus}/>
+                <BookShelf key={1} books={booksWR} onChange={onChangeBookStatus}/>
+                <BookShelf key={2} books={booksR} onChange={onChangeBookStatus}/>
               </div>
             </div>
             <div className="open-search">
