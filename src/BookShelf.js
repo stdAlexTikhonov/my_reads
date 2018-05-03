@@ -7,7 +7,7 @@ class BookShelf extends Component {
     }
 
     handleChange(e) {
-      this.props.onChange(e.target.attributes.getNamedItem('data-id').value,e.target.value);
+      this.props.onChange({ id: e.target.attributes.getNamedItem('data-id').value },e.target.value);
     }
 
     render() {

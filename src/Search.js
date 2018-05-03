@@ -10,7 +10,7 @@ class Search extends Component {
     }
 
     handleChangeStatus(e) {
-      this.props.onChangeBookStatus(e.target.attributes.getNamedItem('data-id').value,e.target.value);
+      this.props.onChangeBookStatus({ id: e.target.attributes.getNamedItem('data-id').value },e.target.value);
     }
 
     handleChange = (e) => {

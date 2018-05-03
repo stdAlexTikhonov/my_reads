@@ -7,6 +7,7 @@ import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 
 class BooksApp extends React.Component {
+  
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -69,7 +70,7 @@ class BooksApp extends React.Component {
   }
 
   Search(query) {
-    console.log(query);
+    
     BooksAPI.search(query)
       .then((books) => {
         if (books.length) {
@@ -77,7 +78,7 @@ class BooksApp extends React.Component {
             searchResult: books.map(book => {
               return {
                 id: book.id,
-                status: 'N',
+                status: 'none',
                 cover: book.imageLinks.thumbnail,
                 title: book.title,
                 author: book.authors ? book.authors.join(', ') : 'Unknown'
@@ -92,10 +93,19 @@ class BooksApp extends React.Component {
   }
 
   changeBookStatus(book, shelf) {
-    console.log(book, shelf);
     BooksAPI.update(book, shelf);
     BooksAPI.getAll().then((books) => {
-      console.log(books)
+      this.setState(() => ({
+        books: books.map(book => {
+          return {
+            id: book.id,
+            status: book.shelf,
+            cover: book.imageLinks.thumbnail,
+            title: book.title,
+            author: book.authors ? book.authors.join(', ') : 'Unknown'
+          }
+        })
+      }))
     })
   }
 
