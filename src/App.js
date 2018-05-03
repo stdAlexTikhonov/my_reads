@@ -7,6 +7,12 @@ import * as BooksAPI from './BooksAPI'
 import ListBooks from './ListBooks'
 
 class BooksApp extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.changeBookStatus = this.changeBookStatus.bind(this);
+    // this.updateBooks = this.updateBooks.bind(this);
+  }
   
   state = {
     /**
@@ -15,7 +21,69 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    books: [
+    books: this.updateBooks(),
+    searchResult: []
+  }
+
+  Search(query) {
+    
+    BooksAPI.search(query)
+      .then((books) => {
+        if (books.length) {
+          this.setState(() => ({
+            searchResult: books.map(book => {
+              return {
+                id: book.id,
+                status: 'none',
+                cover: book.imageLinks.thumbnail,
+                title: book.title,
+                author: book.authors ? book.authors.join(', ') : 'Unknown'
+              }
+            })
+          }))
+        } else {
+          console.log(books);
+        }
+    
+      })
+  }
+
+  changeBookStatus(book, shelf) {
+    console.log(book, shelf);
+    BooksAPI.update(book, shelf).then(books => console.log(books));
+    BooksAPI.getAll().then((books) => {
+      this.setState(() => ({
+        books: books.map(book => {
+          return {
+            id: book.id,
+            status: book.shelf,
+            cover: book.imageLinks.thumbnail,
+            title: book.title,
+            author: book.authors ? book.authors.join(', ') : 'Unknown'
+          }
+        })
+      }))
+    })
+  }
+
+  updateBooks() {
+
+    BooksAPI.getAll().then(books => {
+      console.log(books);
+      this.setState(() => ({
+        books: books.map(book => {
+          return {
+            id: book.id,
+            status: book.shelf,
+            cover: book.imageLinks.thumbnail,
+            title: book.title,
+            author: book.authors ? book.authors.join(', ') : 'Unknown'
+          }
+        })
+      }))
+    })
+
+    return [
       {
         id: '1',
         status: 'currentlyReading',
@@ -65,49 +133,9 @@ class BooksApp extends React.Component {
         title: 'The Adventures of Tom Sawyer',
         author: 'Mark Twain'
       }
-    ],
-    searchResult: []
+    ];
   }
 
-  Search(query) {
-    
-    BooksAPI.search(query)
-      .then((books) => {
-        if (books.length) {
-          this.setState(() => ({
-            searchResult: books.map(book => {
-              return {
-                id: book.id,
-                status: 'none',
-                cover: book.imageLinks.thumbnail,
-                title: book.title,
-                author: book.authors ? book.authors.join(', ') : 'Unknown'
-              }
-            })
-          }))
-        } else {
-          console.log(books);
-        }
-    
-      })
-  }
-
-  changeBookStatus(book, shelf) {
-    BooksAPI.update(book, shelf);
-    BooksAPI.getAll().then((books) => {
-      this.setState(() => ({
-        books: books.map(book => {
-          return {
-            id: book.id,
-            status: book.shelf,
-            cover: book.imageLinks.thumbnail,
-            title: book.title,
-            author: book.authors ? book.authors.join(', ') : 'Unknown'
-          }
-        })
-      }))
-    })
-  }
 
   render() {
     return (
