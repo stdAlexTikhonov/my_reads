@@ -34,11 +34,18 @@ class BooksApp extends React.Component {
       BooksAPI.search(query)
       .then((books) => {
         if (books.length) {
+
+          this.state.books.forEach(book_on_shelf => {
+            books.forEach(book_in_search => {
+              if (book_on_shelf.id === book_in_search.id) book_in_search.shelf = book_on_shelf.shelf;
+            })
+          });
+
           this.setState(() => ({
             searchResult: books.map(book => {
               return {
                 id: book.id,
-                status: 'none',
+                shelf: book.shelf ? book.shelf : 'none',
                 cover: book.imageLinks.thumbnail,
                 title: book.title,
                 author: book.authors ? book.authors.join(', ') : 'Unknown'
@@ -49,7 +56,7 @@ class BooksApp extends React.Component {
           console.log(books);
         }
     
-      })
+      }, (error) => this.setState({ searchResult: []}))
     }
 
   }
@@ -62,7 +69,7 @@ class BooksApp extends React.Component {
         books: books.map(book => {
           return {
             id: book.id,
-            status: book.shelf,
+            shelf: book.shelf,
             cover: book.imageLinks.thumbnail,
             title: book.title,
             author: book.authors ? book.authors.join(', ') : 'Unknown'
@@ -80,7 +87,7 @@ class BooksApp extends React.Component {
         books: books.map(book => {
           return {
             id: book.id,
-            status: book.shelf,
+            shelf: book.shelf,
             cover: book.imageLinks.thumbnail,
             title: book.title,
             author: book.authors ? book.authors.join(', ') : 'Unknown'

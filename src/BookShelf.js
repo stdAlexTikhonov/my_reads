@@ -21,7 +21,7 @@ class BookShelf extends Component {
  
         return (
             <div className="bookshelf">
-            <h2 className="bookshelf-title">{ books.length ? title[books[0].status] : '' }</h2>
+            <h2 className="bookshelf-title">{ books.length ? title[books[0].shelf] : '' }</h2>
             <div className="bookshelf-books">
               <ol className="books-grid"> 
                 {
@@ -32,7 +32,7 @@ class BookShelf extends Component {
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select onChange={this.handleChange} data-id={book.id} value={book.status}>
+                              <select onChange={this.handleChange} data-id={book.id} value={book.shelf}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

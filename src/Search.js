@@ -65,7 +65,7 @@ class Search extends Component {
                           <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
                             <div className="book-shelf-changer">
-                              <select onChange={this.handleChangeStatus} data-id={book.id} value={book.status}>
+                              <select onChange={this.handleChangeStatus} data-id={book.id} value={book.shelf}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>

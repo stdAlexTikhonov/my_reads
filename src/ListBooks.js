@@ -10,9 +10,9 @@ class ListBooks extends Component {
 
         const { books, onChangeBookStatus } = this.props;
 
-        const booksCR = books.filter(book => book.status === 'currentlyReading'),
-              booksWR = books.filter(book => book.status === 'wantToRead'),
-              booksR = books.filter(book => book.status === 'read');
+        const booksCR = books.filter(book => book.shelf === 'currentlyReading'),
+              booksWR = books.filter(book => book.shelf === 'wantToRead'),
+              booksR = books.filter(book => book.shelf === 'read');
 
         return (
             <div className="list-books">
