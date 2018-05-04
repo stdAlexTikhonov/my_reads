@@ -62,21 +62,22 @@ class BooksApp extends React.Component {
   }
 
   changeBookStatus(book, shelf) {
-    console.log(book, shelf);
-    BooksAPI.update(book, shelf).then(books => console.log(books));
-    BooksAPI.getAll().then((books) => {
-      this.setState(() => ({
-        books: books.map(book => {
-          return {
-            id: book.id,
-            shelf: book.shelf,
-            cover: book.imageLinks.thumbnail,
-            title: book.title,
-            author: book.authors ? book.authors.join(', ') : 'Unknown'
-          }
-        })
-      }))
-    })
+    BooksAPI.update(book, shelf).then(books => {
+      BooksAPI.getAll().then((books) => {
+        this.setState(() => ({
+          books: books.map(book => {
+            return {
+              id: book.id,
+              shelf: book.shelf,
+              cover: book.imageLinks.thumbnail,
+              title: book.title,
+              author: book.authors ? book.authors.join(', ') : 'Unknown'
+            }
+          })
+        }))
+      })
+    });
+
   }
 
   componentDidMount() {
