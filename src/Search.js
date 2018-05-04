@@ -1,23 +1,14 @@
 import React, {Component } from 'react'
 import { Link } from 'react-router-dom'
-import serializeForm from 'form-serialize';
+import Book from './Book'
 
 class Search extends Component {
-
-    constructor(props) {
-      super(props);
-      this.handleChangeStatus = this.handleChangeStatus.bind(this);
-    }
-
-    handleChangeStatus(e) {
-      this.props.onChangeBookStatus({ id: e.target.attributes.getNamedItem('data-id').value },e.target.value);
-    }
 
 
     handleChange = (e) => {
       if (this.props.onSearch) {
         this.props.onSearch(e.target.value);
-    }
+      }
     }
 
     
@@ -25,7 +16,7 @@ class Search extends Component {
     
   
     render() {
-      const { searchResult } = this.props;
+      const { searchResult, onChange } = this.props;
 
     
         return (
@@ -53,23 +44,8 @@ class Search extends Component {
                     searchResult.map((book, ind) => {
                     return (
                         <li key={ind}>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={this.handleChangeStatus} data-id={book.id} value={book.shelf}>
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.author}</div>
-                        </div>
-                      </li>
+                          <Book onChange={onChange} id={book.id} title={book.title} cover={book.cover} author={book.author} shelf={book.shelf}/>
+                        </li>
                     )
                 })
             }

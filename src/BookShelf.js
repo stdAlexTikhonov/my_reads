@@ -1,4 +1,5 @@
 import React, {Component } from 'react'
+import Book from './Book'
 
 class BookShelf extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class BookShelf extends Component {
     }
 
     render() {
-        const { books } = this.props;
+        const { books, onChange } = this.props;
 
         const title = {
             'currentlyReading': 'Currently Reading',
@@ -27,23 +28,8 @@ class BookShelf extends Component {
                 {
                     books.map((book, ind) => {
                     return (
-                        <li key={ind}>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${book.cover}")` }}></div>
-                            <div className="book-shelf-changer">
-                              <select onChange={this.handleChange} data-id={book.id} value={book.shelf}>
-                                <option value="none" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.author}</div>
-                        </div>
+                      <li key={ind}>
+                        <Book onChange={onChange} id={book.id} title={book.title} cover={book.cover} author={book.author} shelf={book.shelf}/>
                       </li>
                     )
                 })
