@@ -21,7 +21,7 @@ class BookShelf extends Component {
  
         return (
             <div className="bookshelf">
-            <h2 className="bookshelf-title">{ title[books[0].status] }</h2>
+            <h2 className="bookshelf-title">{ books.length ? title[books[0].status] : '' }</h2>
             <div className="bookshelf-books">
               <ol className="books-grid"> 
                 {
