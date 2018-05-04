@@ -13,7 +13,7 @@ class Search extends Component {
       this.props.onChangeBookStatus({ id: e.target.attributes.getNamedItem('data-id').value },e.target.value);
     }
 
-    handleChange = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const values = serializeForm(e.target, { hash: true});
 
@@ -21,6 +21,14 @@ class Search extends Component {
             this.props.onSearch(values.query);
         }
     }
+
+    handleChange = (e) => {
+      if (e.target.value === '') {
+        this.props.onSearch('');
+      }
+    }
+
+    
 
     
   
@@ -41,8 +49,8 @@ class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <form onSubmit={this.handleChange}>
-                <input type="text" name='query' placeholder="Search by title or author"/>
+                <form onSubmit={this.handleSubmit}>
+                <input type="text" onChange={this.handleChange} name='query' placeholder="Search by title or author"/>
                 </form>
 
               </div>

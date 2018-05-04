@@ -26,8 +26,12 @@ class BooksApp extends React.Component {
   }
 
   Search(query) {
-    
-    BooksAPI.search(query)
+    if (query === '') {
+      this.setState(() => ({
+        searchResult: []
+      }))
+    } else {
+      BooksAPI.search(query)
       .then((books) => {
         if (books.length) {
           this.setState(() => ({
@@ -46,6 +50,8 @@ class BooksApp extends React.Component {
         }
     
       })
+    }
+
   }
 
   changeBookStatus(book, shelf) {
