@@ -46,8 +46,8 @@ class BooksApp extends React.Component {
               return {
                 id: book.id,
                 shelf: book.shelf ? book.shelf : 'none',
-                cover: book.imageLinks.thumbnail,
-                title: book.title,
+                cover: book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'https://www.ascent-vape.com/wp-content/themes/focusmagazine_theme/focusmagazine/images/thumbnail-default.jpg',
+                title: book.title ? book.title : 'no title',
                 author: book.authors ? book.authors.join(', ') : 'Unknown'
               }
             })
@@ -69,8 +69,8 @@ class BooksApp extends React.Component {
             return {
               id: book.id,
               shelf: book.shelf,
-              cover: book.imageLinks.thumbnail,
-              title: book.title,
+              cover: book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'https://www.ascent-vape.com/wp-content/themes/focusmagazine_theme/focusmagazine/images/thumbnail-default.jpg',
+              title: book.title ? book.title : 'no title',
               author: book.authors ? book.authors.join(', ') : 'Unknown'
             }
           })
