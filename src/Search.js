@@ -22,6 +22,7 @@ class Search extends Component {
       } else {
         BooksAPI.search(this.state.query)
         .then((books) => {
+          console.log(books);
           if (books.length) {
   
             this.props.books.forEach(book_on_shelf => {

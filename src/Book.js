@@ -14,13 +14,20 @@ class Book extends Component {
     handleChange(e) {
         this.props.onChange({ id: this.id },e.target.value);
     }
-
+ 
   
     render() {
+
+        let componentStyle = { 
+            width: 128, 
+            height: 193, 
+            backgroundImage:`url("${this.cover}")` 
+        }
+
         return (
             <div className="book">
                 <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url("${this.cover}")` }}></div>
+                <div className="book-cover" style={componentStyle}></div>
                 <div className="book-shelf-changer">
                     <select onChange={this.handleChange} data-id={this.id} value={this.shelf}>
                     <option disabled>Move to...</option>
