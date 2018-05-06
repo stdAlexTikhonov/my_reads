@@ -26,38 +26,7 @@ class BooksApp extends React.Component {
   }
 
   Search(query) {
-    if (query === '') {
-      this.setState(() => ({
-        searchResult: []
-      }))
-    } else {
-      BooksAPI.search(query)
-      .then((books) => {
-        if (books.length) {
 
-          this.state.books.forEach(book_on_shelf => {
-            books.forEach(book_in_search => {
-              if (book_on_shelf.id === book_in_search.id) book_in_search.shelf = book_on_shelf.shelf;
-            })
-          });
-
-          this.setState(() => ({
-            searchResult: books.map(book => {
-              return {
-                id: book.id,
-                shelf: book.shelf ? book.shelf : 'none',
-                cover: book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'https://www.ascent-vape.com/wp-content/themes/focusmagazine_theme/focusmagazine/images/thumbnail-default.jpg',
-                title: book.title ? book.title : 'no title',
-                author: book.authors ? book.authors.join(', ') : 'Unknown'
-              }
-            })
-          }))
-        } else {
-          console.log(books);
-        }
-    
-      }, (error) => this.setState({ searchResult: []}))
-    }
 
   }
 
@@ -83,7 +52,6 @@ class BooksApp extends React.Component {
   componentDidMount() {
 
     BooksAPI.getAll().then(books => {
-      console.log(books);
       this.setState(() => ({
         books: books.map(book => {
           return {
@@ -104,12 +72,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route path='/search' render={() => {
-          return (<Search 
-              onSearch={(query) => this.Search(query)}
-              searchResult={this.state.searchResult} 
-              onChange={this.changeBookStatus} />)
-            }} />
+        <Route path='/search' render={() => (<Search books={this.state.books} onChange={this.changeBookStatus} />) } />
         <Route exact path='/' render={() => {
           return (<ListBooks books={this.state.books} onChangeBookStatus={this.changeBookStatus}/>)
         }} />
