@@ -13,8 +13,8 @@ The MyReads  allows you to select and categorize books you have read, are curren
 
  You should use the `strong` tag.
 
- `
+ ```
     function HelloWorld() {
         console.log('hello');
     }
- `
+ ```
