@@ -23,4 +23,24 @@ The MyReads  allows you to select and categorize books you have read, are curren
 
  ![My car](./car.jpg)
 
-<h2>Here is simple H@</h2>
+##Here is simple H@
+
+# My Fabulous Recipe
+
+This recipe for **cereal and milk** has been passed down my family for months.
+
+## Ingredients
+
+- Cereal (you can find cool cereals [here](www.example.com/coolcereals))
+- Milk
+
+
+## Directions
+
+If I were writing these out as **code**, it might look something like this:
+```
+if bowl is empty:
+    add cereal
+if bowl only has cereal in it:
+    add milk
+```
