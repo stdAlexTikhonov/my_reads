@@ -23,4 +23,4 @@ The MyReads  allows you to select and categorize books you have read, are curren
 
  ![My car](./car.jpg)
 
- <div style="width: 20px; height: 20px;box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>
+ <div style="width: 20px; height: 20px;background: red;"></div>
