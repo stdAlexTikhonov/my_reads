@@ -6,3 +6,5 @@ The MyReads  allows you to select and categorize books you have read, are curren
  ## installing and launching the project
  1. npm install
  2. npm start
+
+ Isn't today a **wonderful** day?
