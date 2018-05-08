@@ -10,3 +10,11 @@ The MyReads  allows you to select and categorize books you have read, are curren
  Isn't today a **wonderful** day?
 
  And in that moment I thought to myself: _Did I turn off the stove?_
+
+ You should use the `strong` tag.
+
+ `
+    function HelloWorld() {
+        console.log('hello');
+    }
+ `
