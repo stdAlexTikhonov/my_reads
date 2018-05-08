@@ -21,4 +21,4 @@ The MyReads  allows you to select and categorize books you have read, are curren
 
  #Here is my car
 
- [My car](./car.jpg)
+ ![My car](./car.jpg)
