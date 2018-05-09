@@ -24,3 +24,12 @@ The MyReads  allows you to select and categorize books you have read, are curren
 In command line:
 1. At first type in terminal `npm install`
 2. To start application run `npm start`
+
+
+License
+----
+
+MIT
+
+
+**Free Software, Hell Yeah!**
