@@ -13,7 +13,7 @@ The MyReads  allows you to select and categorize books you have read, are curren
 ### Search page
 ![Search page](./scrin2.png)
 
- ## installing and launching the project
- In command line:
-    1. At first type in terminal `npm install`
-    2. To start application run `npm start`
+## installing and launching the project
+In command line:
+1. At first type in terminal `npm install`
+2. To start application run `npm start`
