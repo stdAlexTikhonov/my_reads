@@ -3,11 +3,21 @@ import { Link } from 'react-router-dom'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 
+function transform(book) {
+  return {
+    id: book.id,
+    status: book.shelf,
+    title: book.title ? book.title : 'Unknown',
+    author: book.authors ? book.authors[0] : 'Unknown',
+    cover: book.imageLinks ? book.imageLinks.thumbnail : null
+  }
+}
+
 class Search extends Component {
 
     state = {
       query: '',
-      searchResult: []
+      searched: []
     }
 
 
@@ -17,6 +27,7 @@ class Search extends Component {
       this.setState({
         query: val
       });
+      console.log(val);
   
       BooksAPI.search(val !== '' ? val : ' ').then(books => {
         console.log(books);
