@@ -28,7 +28,7 @@ class BookShelf extends Component {
                 {
                     books.map((book, ind) => {
                     return (
-                      <li key={ind}>
+                      <li key={book.id}>
                         <Book onChange={onChange} id={book.id} title={book.title} cover={book.cover} author={book.author} shelf={book.shelf}/>
                       </li>
                     )
