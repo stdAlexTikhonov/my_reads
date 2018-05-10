@@ -11,47 +11,26 @@ class Search extends Component {
     }
 
 
-    handleChange = (query) => {
-      this.setState(() => ({
-        query: query.trim()
-      }))
-      if (this.state.query === '') {
-        this.setState(() => ({
-          searchResult: []
-        }))
-      } else {
-        BooksAPI.search(this.state.query)
-        .then((books) => {
-          console.log(books);
-          if (books.length) {
+ 
+    onChangeQuery = (e) => {
+      let val = e.target.value;
+      this.setState({
+        query: val
+      });
   
-            this.props.books.forEach(book_on_shelf => {
-              books.forEach(book_in_search => {
-                if (book_on_shelf.id === book_in_search.id) book_in_search.shelf = book_on_shelf.shelf;
-              })
-            });
+      BooksAPI.search(val !== '' ? val : ' ').then(books => {
+        console.log(books);
+        if (books.error) {
+          books = [];
+        }
   
-            this.setState(() => ({
-              searchResult: books.map(book => {
-                return {
-                  id: book.id,
-                  shelf: book.shelf ? book.shelf : 'none',
-                  cover: book.imageLinks.thumbnail ? book.imageLinks.thumbnail : 'https://www.ascent-vape.com/wp-content/themes/focusmagazine_theme/focusmagazine/images/thumbnail-default.jpg',
-                  title: book.title ? book.title : 'no title',
-                  author: book.authors ? book.authors.join(', ') : 'Unknown'
-                }
-              })
-            }))
-          } else {
-            console.log(books);
-          }
-      
-        }, (error) => this.setState({ searchResult: []}))
-      }
+        this.setState({
+          searched: books.map(transform)
+        })
+        
+  
+      });
     }
-
-    
-
     
   
     render() {
@@ -72,7 +51,7 @@ class Search extends Component {
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
                 
-                <input type="text" onChange={(event) => this.handleChange(event.target.value)} value={this.state.query} name='query' placeholder="Search by title or author"/>
+                <input type="text" onChange={this.onChangeQuery} value={this.state.query} name='query' placeholder="Search by title or author"/>
             
 
               </div>
@@ -80,9 +59,9 @@ class Search extends Component {
             <div className="search-books-results">
               <ol className="books-grid">
               {
-                    this.state.searchResult.map((book, ind) => {
+                    this.state.searched.map((book, ind) => {
                     return (
-                        <li key={ind}>
+                        <li key={book.id}>
                           <Book onChange={onChange} id={book.id} title={book.title} cover={book.cover} author={book.author} shelf={book.shelf}/>
                         </li>
                     )
