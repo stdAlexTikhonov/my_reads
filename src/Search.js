@@ -6,7 +6,7 @@ import * as BooksAPI from './BooksAPI'
 function transform(book) {
   return {
     id: book.id,
-    shelf: book.shelf,
+    shelf: 'none',
     title: book.title ? book.title : 'Unknown',
     author: book.authors ? book.authors[0] : 'Unknown',
     cover: book.imageLinks ? book.imageLinks.thumbnail : null
