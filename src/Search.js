@@ -24,19 +24,28 @@ class Search extends Component {
  
     onChangeQuery = (e) => {
       let val = e.target.value;
+
+
+
       this.setState({
         query: val
       });
-      console.log(val);
   
       BooksAPI.search(val !== '' ? val : ' ').then(books => {
-        console.log(books);
         if (books.error) {
           books = [];
         }
   
-        this.setState({
-          searched: books.map(transform)
+        this.setState((prev) => {
+          books = books.map(transform);
+
+          this.props.books.forEach(book_on_shelf => {
+            books.forEach(book_in_search => {
+              if (book_on_shelf.id === book_in_search.id) book_in_search.shelf = book_on_shelf.shelf;
+            })
+          });
+          
+          return ({searched: books})
         })
         
   

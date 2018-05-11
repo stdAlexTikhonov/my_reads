@@ -22,6 +22,7 @@ class BooksApp extends React.Component {
 
   changeBookStatus(book, shelf) {
     let newBook = true; //flag for new books
+    
 
     //does we have this book on shelf
     let books = this.state.books.map(item => {
@@ -47,7 +48,7 @@ class BooksApp extends React.Component {
 
         //doesnt work
         this.setState(prev => ({
-          books: [obj].concat(prev.books)
+          books: [obj].concat(prev.books.slice())
         }));
 
         //DOESN't WORk
@@ -70,7 +71,7 @@ class BooksApp extends React.Component {
       });
     }
 
-    BooksAPI.update(book, shelf).then(books => console.log('success'));
+    BooksAPI.update(book, shelf).then(books => console.log('BookAPI.update'));
 
   }
 
