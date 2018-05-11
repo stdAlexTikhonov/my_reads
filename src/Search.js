@@ -68,6 +68,7 @@ class Search extends Component {
               </div>
             </div>
             <div className="search-books-results">
+              {this.state.searched.length > 0 ? (<div style={{ color: 'green'}}>{this.state.searched.length} books found</div>) : this.state.query === '' ? '' :(<div style={{ color: 'red', fontStyle: 'italic'}}>Books not found</div>)}
               <ol className="books-grid">
               {
                     this.state.searched.map((book, ind) => {
