@@ -38,21 +38,38 @@ class BooksApp extends React.Component {
       return item
     })
 
+    console.log(newBook);
+
     
     if (newBook) { //if it is new, get it from backend
       BooksAPI.get(book.id).then(book => {
         let obj = {
           id: book.id,
           shelf: book.shelf,
-          cover: book.imageLinks.thumbnail,
-          title: book.title,
-          author: book.authors ? book.authors.join(', ') : 'Unknown'
+          title: book.title ? book.title : 'Unknown',
+          author: book.authors ? book.authors[0] : 'Unknown',
+          cover: book.imageLinks ? book.imageLinks.thumbnail : null
         }
+
         books.push(obj);
 
-        this.setState({
-          books: books
-        });
+        //doesnt work
+        // this.setState({
+        //   books: books
+        // });
+
+        //DOESN't WORk
+        this.setState((prev) => {
+          let books = prev.books;
+          books.push(obj);
+          return ({
+            books: books
+          })
+        }
+
+
+      );
+
       });
 
     } else { //else just change state
